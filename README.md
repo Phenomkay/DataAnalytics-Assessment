@@ -4,7 +4,7 @@ This repository contains the SQL queries developed to answer the questions in th
 
 ### Question 1
 
- - **Cross-Selling Opportunity AnalysisProblem**
+ - **Cross-Selling Opportunity Analysis Problem**
 
 **Per-Question Explanations** 
 
@@ -24,4 +24,33 @@ This repository contains the SQL queries developed to answer the questions in th
 
 **Final SELECT Statement**
 
- - This query joins the results of the two CTEs with the users_customuser table to retrieve customer names.  It then filters for customers who have at least one funded savings plan AND one funded investment plan, as required.  The results are ordered by total_deposits in descending order. 
+ - This query joins the results of the two CTEs with the users_customuser table to retrieve customer names.  It then filters for customers who have at least one funded savings plan AND one funded investment plan, as required.  The results are ordered by total_deposits in descending order.
+
+
+### Question 2
+
+ - **Transaction Frequency Analysis**
+
+**Per-Question Explanation**
+
+ - The finance team wants to understand customer transaction behavior to inform marketing and product strategies. The task is to categorize customers based on their average monthly transaction frequency: "High Frequency" (>= 10 transactions/month), "Medium Frequency" (3-9 transactions/month), and "Low Frequency" (<= 2 transactions/month).
+
+**Approach**
+
+ - To address this, I used a series of CTEs to calculate and categorize customer transaction frequency:
+
+**CustomerMonthlyTransactions CTE**
+
+ - This CTE counts the number of successful transactions for each customer in each month.  It groups the transactions by owner_id and transaction_month, extracting the year and month from the transaction_date.
+
+**AverageMonthlyTransactions CTE**
+
+ - This CTE calculates the average number of monthly transactions for each customer.  It sums the monthly_transaction_count for each customer and divides by the number of distinct months in which they made transactions.  The CAST to REAL is crucial for accurate floating-point division.
+
+**CustomerFrequencyCategory CTE**
+
+ - This CTE categorizes customers based on their avg_transactions_per_month into 'High Frequency', 'Medium Frequency', and 'Low Frequency' categories, using the provided thresholds.
+
+**Final SELECT Statement**
+
+This query aggregates the results from the CustomerFrequencyCategory CTE.  It counts the number of distinct customers in each frequency category and calculates the average avg_transactions_per_month for each category.  The results are then ordered to present the categories in a meaningful sequence ('High', 'Medium', 'Low').
