@@ -6,7 +6,7 @@ This repository contains the SQL queries developed to answer the questions in th
 
 ## Question 1
 
- - **Cross-Selling Opportunity Analysis Problem**
+**Cross-Selling Opportunity Analysis Problem**
 
 **Per-Question Explanations** 
 
@@ -31,7 +31,7 @@ The marketing team wants to identify high-value customers who have the potential
 
 ## Question 2
 
- - **Transaction Frequency Analysis**
+**Transaction Frequency Analysis**
 
 **Per-Question Explanation**
 
@@ -121,3 +121,12 @@ Marketing wants to estimate CLV based on account tenure and transaction volume (
 **Final SELECT Statement**
 
  - This query selects the relevant customer information and the calculated CLV, rounding the tenure to whole months and the CLV to two decimal places for presentation.  The results are ordered by CLV in descending order.
+
+### Challenges
+
+One of the main challenges encountered was in Questions 1 and 4. In both Scenerios the customer names initially appeared as null in the results. 
+This was because the query was selecting from a column that did not contain the complete name. 
+
+**Solution**
+
+The issue was resolved by modifying the query to concatenate the first_name and last_name columns from the users_customuser table, ensuring that the customer names were correctly retrieved and displayed.
