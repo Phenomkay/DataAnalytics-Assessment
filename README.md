@@ -2,9 +2,9 @@
 
 This repository contains the SQL queries developed to answer the questions in the Data Analytics Assessment. The queries are organized into four separate SQL files, each answering four questions.
 
---
 
-### Question 1
+
+## Question 1
 
  - **Cross-Selling Opportunity Analysis Problem**
 
@@ -28,9 +28,8 @@ This repository contains the SQL queries developed to answer the questions in th
 
  - This query joins the results of the two CTEs with the users_customuser table to retrieve customer names.  It then filters for customers who have at least one funded savings plan AND one funded investment plan, as required.  The results are ordered by total_deposits in descending order.
 
---
 
-### Question 2
+## Question 2
 
  - **Transaction Frequency Analysis**
 
