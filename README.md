@@ -55,4 +55,30 @@ This repository contains the SQL queries developed to answer the questions in th
 
 **Final SELECT Statement**
 
-This query aggregates the results from the CustomerFrequencyCategory CTE.  It counts the number of distinct customers in each frequency category and calculates the average avg_transactions_per_month for each category.  The results are then ordered to present the categories in a meaningful sequence ('High', 'Medium', 'Low').
+ - This query aggregates the results from the CustomerFrequencyCategory CTE.  It counts the number of distinct customers in each frequency category and calculates the average avg_transactions_per_month for each category.  The results are then ordered to present the categories in a meaningful sequence ('High', 'Medium', 'Low').
+
+
+## Question 3
+
+**Account Inactivity Alert**
+
+
+**Per-Question Explanation**
+
+ - The ops team wants to flag accounts with no inflow transactions for over one year. The task is to find all active accounts (savings or investments) with no transactions in the last 1 year (365 days).
+
+**Approach**
+
+ - To identify these inactive accounts, I employed the following strategy using Common Table Expressions (CTEs):
+
+**LastTransaction CTE**
+
+ - This CTE determines the most recent successful transaction date for each plan. It selects the maximum transaction_date from the savings_savingsaccount table for each plan_id, considering only transactions with a status of 'success' or 'successful'.
+
+**ActivePlans CTE**
+
+ - This CTE identifies the active savings and investment plans. It selects plans from the plans_plan table that are not archived or deleted and are classified as either savings or investment plans based on the flags is_regular_savings and is_a_fund.
+
+**Final SELECT Statement**
+
+This query joins the ActivePlans and LastTransaction CTEs to find plans where the last transaction was more than 365 days ago. It calculates the inactivity period in days and orders the results by this period in descending order.
